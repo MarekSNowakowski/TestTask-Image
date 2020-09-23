@@ -12,12 +12,11 @@ public class DownloadingImage : MonoBehaviour
     async void Start()
     {
         Image ImageComponent = GetComponent<Image>();
-        Material material = ImageComponent.material;
 
         texture = await GetRemoteTexture(imageURL); //download image and set it to texture
 
-        material.mainTexture = texture;     //display image via material
-        ImageComponent.material = material;
+        Sprite s = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero, 1f);
+        ImageComponent.sprite = s;
     }
 
     public static async Task<Texture2D> GetRemoteTexture(string url)
